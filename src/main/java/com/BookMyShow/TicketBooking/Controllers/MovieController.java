@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("movie")
 public class MovieController {
@@ -24,5 +26,11 @@ public class MovieController {
     public ResponseEntity<MovieResponseDto> getMovie(@RequestParam String name){
         MovieResponseDto movieResponseDto = movieService.getMovieFromDb(name);
         return new ResponseEntity<>(movieResponseDto,HttpStatus.CREATED);
+    }
+
+    @GetMapping("get-list-of-movies")
+    public ResponseEntity<List<MovieResponseDto>> getAllMovies(){
+        List<MovieResponseDto> movieResponseDtos = movieService.getAllMovies();
+        return new ResponseEntity<>(movieResponseDtos,HttpStatus.CREATED);
     }
 }

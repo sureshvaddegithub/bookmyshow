@@ -48,4 +48,17 @@ public class TheaterService {
 
         return listOfTheaterSeats;
     }
+
+    public List<TheaterRequestDto> getTheaterByCityname(String cityname){
+
+        List<TheaterEntity> theaterEntities = theaterRepository.findByCity(cityname);
+
+        List<TheaterRequestDto> theaterRequestDtos = new ArrayList<>();
+        for(TheaterEntity theaterEntity:theaterEntities){
+            TheaterRequestDto theaterRequestDto =TheaterRequestDto.builder().name(theaterEntity.getName())
+                    .address(theaterEntity.getAddress()).city(theaterEntity.getCity()).build();
+            theaterRequestDtos.add(theaterRequestDto);
+        }
+        return theaterRequestDtos;
+    }
 }
